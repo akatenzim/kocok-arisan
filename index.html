@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Arisan | AnandaCode</title>
+  </head>
+  <body>
+    <div id="app" class="app">
+      <div id="names" class="container" v-if="state">
+        <div class="logo">
+          <h2>Kocok Arisannya Yuk</h2>
+        </div>
+        <div class="form-name">
+          <input
+            type="text"
+            placeholder="Masukkan nama.."
+            @keyup.Enter="addNameList"
+            v-model.trim.lazy="inputName"
+            @keyup.Tab
+          />
+          <button @click="addNameList" type="submit">Add</button>
+        </div>
+        <div class="name-list">
+          <div
+            v-for="(name, index) in names"
+            :key="name"
+            @click="removeName(index)"
+          >
+            {{ name }}
+          </div>
+        </div>
+        <div class="generate-btn" v-if="isReady" @click="showResult">GO</div>
+        <div class="show-error" v-if="showError">{{ error }}</div>
+      </div>
+
+      <div class="container-result" v-if="!state">
+        <div class="title-result">
+          <h2>Selamat sekarang giliran</h2>
+        </div>
+        <div class="winner-name">
+          <h3>✨{{ result }}✨</h3>
+        </div>
+        <div class="reset-btn" @click="resetPage">Reset halaman</div>
+        <div class="mix-again" @click="mixAgain">Klik untuk acak lagi</div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
